@@ -1,0 +1,9 @@
+{
+	"config": {
+		"vendor-dir": "composer",
+		"bin-dir": "composer/bin"
+	},
+    "require": {
+        "mikecao/flight": ">=1.0.0"
+    }
+}
