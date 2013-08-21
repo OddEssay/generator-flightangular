@@ -55,10 +55,16 @@ FlightangularGenerator.prototype.askFor = function askFor() {
 
 FlightangularGenerator.prototype.app = function app() {
 	this.mkdir('js-src'); // JavaScript Source files, Grunt builds from here.
+	this.mkdir('js-src/directives');
+	this.mkdir('js-src/controllers');
+	this.mkdir('js-src/filters');
+	this.mkdir('js-src/services');
+
 	this.mkdir('less-src'); // Less files go in here.
 
 	this.mkdir('server'); // PHP source files
 	this.mkdir('server/lib');
+	this.mkdir('server/lib/controllers');
 	this.mkdir('server/views');
 
 	this.copy('_composer.phar','composer.phar');
@@ -66,6 +72,7 @@ FlightangularGenerator.prototype.app = function app() {
 
 	this.template('_package.json', 'package.json');
 	this.copy('_bower.json', 'bower.json');
+	this.template('_Gruntfile.js','Gruntfile.js');
 
 	this.mkdir('public'); // Apache points into here.
 	this.mkdir('public/js'); // Grunt builds JavaScript files into here
