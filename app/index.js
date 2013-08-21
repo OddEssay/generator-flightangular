@@ -48,7 +48,7 @@ FlightangularGenerator.prototype.askFor = function askFor() {
 	this.appName = props.appName;
 	this.domainName = props.domainName;
 	this.installBootstrap = props.installBootstrap;
-	this.installAnalytics = props.installAnalytics;
+	this.installFontAwesome = props.installFontAwesome;
     cb();
   }.bind(this));
 };
