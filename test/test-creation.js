@@ -22,12 +22,12 @@ describe('flightangular generator', function () {
   it('creates expected files', function (done) {
     var expected = [
       // add files you expect to exist here.
-      '.jshintrc',
-      '.editorconfig'
+      'public/index.php',
     ];
 
     helpers.mockPrompt(this.app, {
-      'someOption': true
+      'installBootstrap': true,
+		'installFontAwesome': true
     });
     this.app.options['skip-install'] = true;
     this.app.run({}, function () {
