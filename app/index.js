@@ -67,6 +67,8 @@ FlightangularGenerator.prototype.app = function app() {
 	this.mkdir('server/lib');
 	this.mkdir('server/lib/controllers');
 	this.mkdir('server/views');
+	this.template('_layout.php', 'server/views/layout.php');
+	this.template('_app.php', 'server/views/app.php');
 
 	this.copy('_composer.phar', 'composer.phar');
 	this.copy('_composer.json', 'composer.json');
@@ -81,6 +83,9 @@ FlightangularGenerator.prototype.app = function app() {
 	this.mkdir('public/media'); // A directory to put images etc
 
 	this.template('_index.php', 'public/index.php');
+	this.mkdir('public/partials');
+	this.template('partials/index.html', 'public/partials/index.html');
+
 	this.copy('_htaccess', 'public/.htaccess');
 
 	this.template('_apache.conf', 'conf/' + this.domainName + '.conf');
@@ -94,7 +99,7 @@ FlightangularGenerator.prototype.projectfiles = function projectfiles() {
 
 FlightangularGenerator.prototype.installWithBower = function installWithBower() {
 	this.bowerInstall([ 'jquery', 'underscore' ], { save: true });
-	this.bowerInstall(['https://github.com/angular/bower-angular'], { save: true });
+	this.bowerInstall(['https://github.com/angular/bower-angular.git'], { save: true });
 	if (this.installBootstrap === true) {
 		this.bowerInstall(['bootstrap'], {save: true});
 	}
