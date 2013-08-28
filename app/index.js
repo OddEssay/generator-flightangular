@@ -8,7 +8,7 @@ var clc = require('cli-color');
 var FlightangularGenerator = module.exports = function FlightangularGenerator(args, options, config) {
 	yeoman.generators.Base.apply(this, arguments);
 	this.on('end', function () {
-		this.installDependencies({ skipInstall: options['skip-install'] });
+		this.installDependencies({ skipInstall: options['skip-install'] },function(a){this._finalMessages();},function(a){this._finalMessages();} );
 		this._finalMessages();
 	});
 

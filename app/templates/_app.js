@@ -7,6 +7,6 @@ var <%= _.camelize(appName) %>App = angular.module(
 	'$routeProvider',
 	function($routeProvider) {
         $routeProvider.
-        	when("/", {templateUrl: '/partials/index.html'});
+        	when("/", {templateUrl: '/partials/index.html'}); //RouteInsertReference
 	}
 ]);
