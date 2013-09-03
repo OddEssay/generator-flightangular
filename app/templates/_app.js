@@ -1,7 +1,8 @@
 var <%= _.camelize(appName) %>App = angular.module(
 	'<%= _.camelize(appName) %>',
 	[
-	] 
+		//ModuleInsertReference
+	]
 );
 <%= _.camelize(appName) %>App.config([
 	'$routeProvider',

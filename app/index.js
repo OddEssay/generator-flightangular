@@ -55,9 +55,7 @@ FlightangularGenerator.prototype.askFor = function askFor() {
 FlightangularGenerator.prototype.app = function app() {
 	this.mkdir('js-src'); // JavaScript Source files, Grunt builds from here.
 	this.mkdir('js-src/directives');
-	this.mkdir('js-src/controllers');
 	this.mkdir('js-src/filters');
-	this.mkdir('js-src/services');
 
 	this.template('_app.js', 'js-src/app.js');
 
@@ -65,7 +63,6 @@ FlightangularGenerator.prototype.app = function app() {
 
 	this.mkdir('server'); // PHP source files
 	this.mkdir('server/lib');
-	this.mkdir('server/lib/controllers');
 	this.mkdir('server/views');
 	this.template('_layout.php', 'server/views/layout.php');
 	this.template('_app.php', 'server/views/app.php');
@@ -99,7 +96,7 @@ FlightangularGenerator.prototype.projectfiles = function projectfiles() {
 
 FlightangularGenerator.prototype.installWithBower = function installWithBower() {
 	this.bowerInstall([ 'jquery', 'underscore' ], { save: true });
-	this.bowerInstall(['https://github.com/angular/bower-angular.git'], { save: true });
+	this.bowerInstall(['https://github.com/angular/bower-angular.git','https://github.com/angular/bower-angular-resource.git'], { save: true });
 	if (this.installBootstrap === true) {
 		this.bowerInstall(['bootstrap'], {save: true});
 	}

@@ -1,6 +1,11 @@
 'use strict';
 var util = require('util');
 var yeoman = require('yeoman-generator');
+var _ = require('underscore');
+_.str = require('underscore.string');
+_.mixin(_.str.exports());
+_.str.include('Underscore.string', 'string');
+var clc = require('cli-color');
 
 var CrudGenerator = module.exports = function CrudGenerator(args, options, config) {
   // By calling `NamedBase` here, we get the argument to the subgenerator call
@@ -8,23 +13,40 @@ var CrudGenerator = module.exports = function CrudGenerator(args, options, confi
   yeoman.generators.NamedBase.apply(this, arguments);
 
   console.log('You called the crud subgenerator with the argument ' + this.name + '.');
+	this.appName = 'testApp';
 };
 
 util.inherits(CrudGenerator, yeoman.generators.NamedBase);
 
+CrudGenerator.prototype.getDetails = function getDetails(){
+	var cb = this.async();
+
+	var prompts = [{
+		name: 'crudSingle',
+		message: 'What is the singular variable name?'
+	},{
+		name: 'crudPlural',
+		message: 'What is the plural variable name?'
+	}];
+	this.prompt(prompts, function (props) {
+		this.crudSingle = props.crudSingle;
+		this.crudPlural = props.crudPlural;
+		cb();
+	}.bind(this));
+}
 CrudGenerator.prototype.addPHPFiles = function addPHPFiles() {
-	this.mkdir('server/crudSingle');
-	this.template('controller.php', 'server/crudSingle/Controller.php');
-	this.template('storage.php', 'server/crudSingle/Storage.php');
+	this.mkdir('server/lib/' + _.capitalize(this.crudSingle));
+	this.template('controller.php', 'server/lib/' + _.capitalize(this.crudSingle) + '/Controller.php');
+	this.template('storage.php', 'server/lib/' + _.capitalize(this.crudSingle) + '/Storage.php');
 }
 
 CrudGenerator.prototype.addFlightRoutes = function addFlightRoutes() {
 	var routeText = [
-	"Flight::route('GET /crudPlural', array('crudSingle_Controller','all') ); ",
-	"Flight::route('PUT /crudSingle', array('crudSingle_Controller','create') ); ",
-	"Flight::route('GET /crudSingle/@id', array('crudSingle_Controller','findOne') ); ",
-	"Flight::route('POST /crudSingle/@id', array('crudSingle_Controller','update') ); ",
-	"Flight::route('DELETE /crudSingle/@id', array('crudSingle_Controller','delete') ); ",
+	"Flight::route('GET /" + this.crudPlural + "', array('" + _.capitalize(this.crudSingle) + "_Controller','all') ); ",
+	"Flight::route('PUT /" + this.crudSingle + "', array('" + _.capitalize(this.crudSingle) + "_Controller','create') ); ",
+	"Flight::route('GET /" + this.crudSingle + "/@id', array('" + _.capitalize(this.crudSingle) + "_Controller','findOne') ); ",
+	"Flight::route('POST /" + this.crudSingle + "/@id', array('" + _.capitalize(this.crudSingle) + "_Controller','update') ); ",
+	"Flight::route('DELETE /" + this.crudSingle + "/@id', array('" + _.capitalize(this.crudSingle) + "_Controller','delete') ); ",
 	"//RouteInsertReference"
 	];
 	var indexFile = this.readFileAsString('public/index.php');
@@ -35,12 +57,30 @@ CrudGenerator.prototype.addFlightRoutes = function addFlightRoutes() {
 CrudGenerator.prototype.addAngularRoutes = function addAngularRoutes() {
 	var routeText = [
 		".",
-		"\t\t\twhen('crudPlural', {templateUrl: 'partials/crudSingle/list.html', controller: 'crudSingleListCtrl'}).",
-		"\t\t\twhen('crudSingle/new', {templateUrl: 'partials/crudSingle/new.html', controller: 'crudSingleCtrl'}).",
-		"\t\t\twhen('crudSingle/:id', {templateUrl: 'partials/crudSingle/detail.html', controller: 'crudSingleCtrl'}).",
-		"\t\t\twhen('crudSingle/:id/edit', {templateUrl: 'partials/crudSingle/edit.html', controller: 'crudSingleCtrl'}); //RouteInsertReference"
+		"\t\t\twhen('/" + this.crudPlural + "', {templateUrl: 'partials/" + this.crudSingle + "/list.html', controller: '" + this.crudSingle + "ListCtrl'}).",
+		"\t\t\twhen('/" + this.crudSingle + "/create', {templateUrl: 'partials/" + this.crudSingle + "/create.html', controller: '" + this.crudSingle + "Ctrl'}).",
+		"\t\t\twhen('/" + this.crudSingle + "/:id', {templateUrl: 'partials/" + this.crudSingle + "/detail.html', controller: '" + this.crudSingle + "Ctrl'}).",
+		"\t\t\twhen('/" + this.crudSingle + "/:id/edit', {templateUrl: 'partials/" + this.crudSingle + "/edit.html', controller: '" + this.crudSingle + "Ctrl'}); //RouteInsertReference"
 	];
 	var appFile = this.readFileAsString('js-src/app.js');
 	appFile = appFile.replace('; //RouteInsertReference',routeText.join('\n'));
+	
+	// Angular Needs to include the new module.
+	appFile = appFile.replace('//ModuleInsertReference',"'" + this.crudSingle + "',\n\t\t//ModuleInsertReference");
+
 	this.write('js-src/app.js',appFile);
+}
+CrudGenerator.prototype.addAngularFiles = function addAngularFiles() {
+	this.template('list.html','public/partials/' + this.crudSingle + '/list.html');
+	this.template('create.html','public/partials/' + this.crudSingle + '/create.html');
+	this.template('detail.html','public/partials/' + this.crudSingle + '/detail.html');
+	this.template('edit.html','public/partials/' + this.crudSingle + '/edit.html');
+	this.template('module.js','js-src/' + this.crudSingle + '/' + this.crudSingle + '.js');
+	this.template('singleController.js','js-src/' + this.crudSingle + '/' + this.crudSingle + 'Controller.js');
+	this.template('storageService.js','js-src/' + this.crudSingle + '/' + this.crudSingle + 'Storage.js');
+	this.template('listController.js','js-src/' + this.crudSingle + '/' + this.crudSingle + 'ListController.js');
+	
+}
+CrudGenerator.prototype.rememberGrunt = function rememberGrunt(){
+	console.log(clc.yellowBright('Remember you need to run grunt because app.js has changed!'));
 }
