@@ -45,7 +45,7 @@ CrudGenerator.prototype.addFlightRoutes = function addFlightRoutes() {
 	"Flight::route('GET /" + this.crudPlural + "', array('" + _.capitalize(this.crudSingle) + "_Controller','all') ); ",
 	"Flight::route('PUT /" + this.crudSingle + "', array('" + _.capitalize(this.crudSingle) + "_Controller','create') ); ",
 	"Flight::route('GET /" + this.crudSingle + "/@id', array('" + _.capitalize(this.crudSingle) + "_Controller','findOne') ); ",
-	"Flight::route('POST /" + this.crudSingle + "/@id', array('" + _.capitalize(this.crudSingle) + "_Controller','update') ); ",
+	"Flight::route('PUT /" + this.crudSingle + "/@id', array('" + _.capitalize(this.crudSingle) + "_Controller','update') ); ",
 	"Flight::route('DELETE /" + this.crudSingle + "/@id', array('" + _.capitalize(this.crudSingle) + "_Controller','delete') ); ",
 	"//RouteInsertReference"
 	];

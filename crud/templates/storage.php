@@ -24,11 +24,12 @@ class <%= _.capitalize(crudSingle) %>_Storage {
 		self::_init();
 		return self::$_collection->findOne( array( '_id' => new MongoId($id) ) );
 	}
-	public static function update($data) {
+	public static function update($id,$data) {
 		self::_init();
-		unset($data->_id); // Don't try to rewrite the id
-		$data->updated = new MongoDate(); // Auto add an updated timestamp
+		unset($data['_id']); // Don't try to rewrite the id
+		$data['updated'] = new MongoDate(); // Auto add an updated timestamp
 		self::$_collection->update( array( '_id' => new MongoId($id) ) , $data );
+		return self::findOne($id);
 	}
 	public static function delete($id) {
 		self::_init();
