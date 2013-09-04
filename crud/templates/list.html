@@ -1,7 +1,7 @@
 <h2>List</h2>
-<table>                                                                                                                                                                    
+<table class="table table-striped">                                                                                                                                                                    
 	<tr ng-repeat="<%= crudSingle %> in <%= crudPlural %>">
-		<td><a href=/<%= crudSingle %>/<%= "{{" + crudSingle %>._id.$id}}"><%= "{{" + crudSingle %>._id.$id}}</a></td>
+		<td><a href="#/<%= crudSingle %>/<%= "{{" + crudSingle %>._id.$id}}"><%= "{{" + crudSingle %>._id.$id}}</a></td>
 		<td><%= "{{" + crudSingle %>.name}}</td>
 	</tr>
 </table>
