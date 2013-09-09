@@ -86,6 +86,10 @@ FlightangularGenerator.prototype.app = function app() {
 	this.copy('_htaccess', 'public/.htaccess');
 
 	this.template('_apache.conf', 'conf/' + this.domainName + '.conf');
+
+	this.mkdir('tests');
+	this.template('phpunit.xml','phpunit.xml');
+	this.template('tests/IndexTest.php','tests/IndexTest.php');
 };
 
 FlightangularGenerator.prototype.projectfiles = function projectfiles() {

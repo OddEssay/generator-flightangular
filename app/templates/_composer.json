@@ -4,6 +4,7 @@
 		"bin-dir": "composer/bin"
 	},
     "require": {
-        "mikecao/flight": ">=1.0.0"
+        "mikecao/flight": ">=1.0.0",
+	"phpunit/phpunit": ">=1.0.0"
     }
 }
