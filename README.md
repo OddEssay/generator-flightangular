@@ -10,9 +10,7 @@ This Yeoman generator builds simple AngularJS webapps with a FlightPHP REST API 
 To install generator-flightangular from npm, run:
 
 ```
-$ git clone git@github.com:OddEssay/generator-flightangular.git
-$ cd generator-flightangular
-$ sudo npm link
+$ sudo npm install -g generator-flightangular 
 ```
 
 Then, initiate the generator from your desired deployment location.
@@ -24,6 +22,7 @@ $ yo flightangular
 Anything in the "public" directory is exposed to the webserver.
 
 
+## CRUD SubGenerator
 To create a new set of CRUD routes:
 
 ```
@@ -31,10 +30,14 @@ $ yo flightangular:crud
 ```
 
 Angular Routes created will be:
-/<pluralName>/ - List all models in the db.
-/<singleName>/create - Create a new item.
-/<singleName>/:id - Display an item.
-/<singleName>/:id/edit - Edit an existing item.
+
+/*pluralName*/ - List all models in the db.
+
+/*singleName*/create - Create a new item.
+
+/*singleName*/:id - Display an item.
+
+/*singleName*/:id/edit - Edit an existing item.
 
 ## Tests
 To run PHPUnit tests, ensure you have run composer to deploy PHP components and have "./composer/bin" in your path so the executable can be found, or that PHPUnit is globally available from somewhere else.
