@@ -14,7 +14,7 @@ class <%= _.capitalize(crudSingle) %>_Controller {
 		$data = json_decode(Flight::request()->body,true);
 		echo json_encode( <%= _.capitalize(crudSingle) %>_Storage::update($id,$data) );
 	}
-	public static function delete($id) {
-		echo json_encode( <%= _.capitalize(crudSingle) %>_Storage::delete($id) );
+	public static function remove($id) {
+		echo json_encode( <%= _.capitalize(crudSingle) %>_Storage::remove($id) );
 	}
 }

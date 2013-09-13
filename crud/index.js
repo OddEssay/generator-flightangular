@@ -41,7 +41,7 @@ CrudGenerator.prototype.addFlightRoutes = function addFlightRoutes() {
 	"Flight::route('PUT /" + this.crudSingle + "', array('" + _.capitalize(this.crudSingle) + "_Controller','create') ); ",
 	"Flight::route('GET /" + this.crudSingle + "/@id', array('" + _.capitalize(this.crudSingle) + "_Controller','findOne') ); ",
 	"Flight::route('PUT /" + this.crudSingle + "/@id', array('" + _.capitalize(this.crudSingle) + "_Controller','update') ); ",
-	"Flight::route('DELETE /" + this.crudSingle + "/@id', array('" + _.capitalize(this.crudSingle) + "_Controller','delete') ); ",
+	"Flight::route('DELETE /" + this.crudSingle + "/@id', array('" + _.capitalize(this.crudSingle) + "_Controller','remove') ); ",
 	"//RouteInsertReference"
 	];
 	var indexFile = this.readFileAsString('public/index.php');

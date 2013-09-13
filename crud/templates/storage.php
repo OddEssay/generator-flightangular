@@ -31,8 +31,9 @@ class <%= _.capitalize(crudSingle) %>_Storage {
 		self::$_collection->update( array( '_id' => new MongoId($id) ) , $data );
 		return self::findOne($id);
 	}
-	public static function delete($id) {
+	public static function remove($id) {
 		self::_init();
-		
+		self::$_collection->remove( array( '_id' => new MongoId($id) ) );
+		return true;
 	}
 }

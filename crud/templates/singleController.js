@@ -13,4 +13,9 @@
 			$location.path('/<%= crudSingle %>/' + $scope.<%= crudSingle %>._id.$id); // Redirect to detail view after a save
 		});
 	}
+	$scope.doRemove = function() {
+		$scope.<%= crudSingle %>.$remove(function(){
+			$location.path('/<%= crudPlural %>');
+		});
+	}
 }]);
