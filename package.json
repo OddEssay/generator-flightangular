@@ -1,11 +1,11 @@
 {
   "name": "generator-flightangular",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A WebApp Generator for Yeoman: FlightPHP + MongoDB backend, AngularJS frontend.",
   "keywords": [
     "yeoman-generator",
-	"angularjs",
-	"flightphp"
+    "angularjs",
+    "flightphp"
   ],
   "homepage": "https://github.com/OddEssay/generator-flightangular",
   "bugs": "https://github.com/OddEssay/generator-flightangular/issues",
@@ -24,9 +24,9 @@
   },
   "dependencies": {
     "yeoman-generator": "~0.13.0",
-	"cli-color": ">0.0.0",
-	"underscore": ">0.0.0",
-	"underscore.string": ">0.0.0"
+    "cli-color": ">0.0.0",
+    "underscore": ">0.0.0",
+    "underscore.string": ">0.0.0"
   },
   "devDependencies": {
     "mocha": "~1.12.0"
