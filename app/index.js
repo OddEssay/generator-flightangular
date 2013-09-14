@@ -82,6 +82,7 @@ FlightangularGenerator.prototype.app = function app() {
 	this.template('_index.php', 'public/index.php');
 	this.mkdir('public/partials');
 	this.template('partials/index.html', 'public/partials/index.html');
+	this.template('partials/nav.html', 'public/partials/nav.html');
 
 	this.copy('_htaccess', 'public/.htaccess');
 

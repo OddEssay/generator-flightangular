@@ -23,6 +23,7 @@ describe('flightangular generator', function () {
 			// add files you expect to exist here.
 			'public/index.php',
 			'public/partials/index.html',
+			'public/partials/nav.html',
 			'js-src/app.js',
 			'Gruntfile.js',
 			'package.json',

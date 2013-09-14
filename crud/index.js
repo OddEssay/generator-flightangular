@@ -7,6 +7,9 @@ _.mixin(_.str.exports());
 _.str.include('Underscore.string', 'string');
 var clc = require('cli-color');
 
+var domino = require('domino');
+var Zepto = require('zepto-node');
+
 var CrudGenerator = module.exports = function CrudGenerator(args, options, config) {
 	  yeoman.generators.Base.apply(this, arguments);
 
@@ -22,10 +25,16 @@ CrudGenerator.prototype.getDetails = function getDetails(){
 	},{
 		name: 'crudPlural',
 		message: 'What is the plural variable name?'
+	},{
+		name: 'addToNav',
+		message: 'Add a link to the list view into the Nav menu?',
+		type: 'confirm',
+		default: true
 	}];
 	this.prompt(prompts, function (props) {
 		this.crudSingle = props.crudSingle;
 		this.crudPlural = props.crudPlural;
+		this.addToNav = props.addToNav;
 		cb();
 	}.bind(this));
 }
@@ -75,6 +84,19 @@ CrudGenerator.prototype.addAngularFiles = function addAngularFiles() {
 	this.template('storageService.js','js-src/' + this.crudSingle + '/' + this.crudSingle + 'Storage.js');
 	this.template('listController.js','js-src/' + this.crudSingle + '/' + this.crudSingle + 'ListController.js');
 	
+}
+CrudGenerator.prototype.editNavPartial = function editNavPartial() {
+	if(this.addToNav === true) {
+		var navPartial = this.readFileAsString('public/partials/nav.html');
+		var window = domino.createWindow(navPartial);
+
+		var $ = Zepto(window);
+
+		$('.nav').append('<li><a href="#/' + this.crudPlural   + '">' +  _.capitalize(this.crudPlural) + '</a></li>');
+		navPartial = $.document.body.innerHTML;
+
+		this.write('public/partials/nav.html',navPartial);
+	}
 }
 CrudGenerator.prototype.rememberGrunt = function rememberGrunt(){
 	console.log(clc.yellowBright('Remember you need to run grunt because app.js has changed!'));
