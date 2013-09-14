@@ -11,9 +11,11 @@ var domino = require('domino');
 var Zepto = require('zepto-node');
 
 var CrudGenerator = module.exports = function CrudGenerator(args, options, config) {
-	  yeoman.generators.Base.apply(this, arguments);
-
-	this.appName = 'testApp';
+	yeoman.generators.Base.apply(this, arguments);
+	var packageFile = this.readFileAsString('package.json');	
+	var packageInfo = JSON.parse(packageFile);
+	console.log(packageInfo);
+	this.appName = packageInfo.name;
 };
 util.inherits(CrudGenerator, yeoman.generators.Base);
 CrudGenerator.prototype.getDetails = function getDetails(){
