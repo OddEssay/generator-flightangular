@@ -1,6 +1,6 @@
 {
   "name": "generator-flightangular",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "A WebApp Generator for Yeoman: FlightPHP + MongoDB backend, AngularJS frontend.",
   "keywords": [
     "yeoman-generator",

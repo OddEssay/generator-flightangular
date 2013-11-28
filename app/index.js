@@ -100,7 +100,7 @@ FlightangularGenerator.prototype.projectfiles = function projectfiles() {
 };
 
 FlightangularGenerator.prototype.installWithBower = function installWithBower() {
-	this.bowerInstall([ 'jquery', 'underscore' ], { save: true });
+	this.bowerInstall([ 'jquery', 'underscore', 'angular-route' ], { save: true });
 	this.bowerInstall(['https://github.com/angular/bower-angular.git','https://github.com/angular/bower-angular-resource.git'], { save: true });
 	if (this.installBootstrap === true) {
 		this.bowerInstall(['bootstrap'], {save: true});

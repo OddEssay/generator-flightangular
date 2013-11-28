@@ -1,6 +1,7 @@
 var <%= _.camelize(appName) %>App = angular.module(
 	'<%= _.camelize(appName) %>',
 	[
+        'ngRoute',
 		//ModuleInsertReference
 	]
 );

@@ -20,7 +20,8 @@ module.exports = function(grunt) {
 					"public/js/vendor.js": [
 						'bower_components/jquery/jquery.js',
 						'bower_components/angular/angular.js',
-						'bower_components/angular-resource/angular-resource.js',
+                        'bower_components/angular-resource/angular-resource.js',
+                        'bower_components/angular-route/angular-route.js',
 						<% if(installBootstrap) { %> 'bower_components/bootstrap/dist/js/bootstrap.js', <% } %>
 					]
 				}
